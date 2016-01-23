@@ -5,12 +5,19 @@
 */
 package com.payfact.controlador;
 
-import spark.Route;
+import java.util.HashMap;
+import java.util.Map;
+import spark.ModelAndView;
+import spark.TemplateViewRoute;
 
 /**
  *
  * @author camm
  */
 public class IndexHandler {
-	public Route  index = (request, response) -> "PayFact!";
+	public TemplateViewRoute index = (request, response) -> {
+		Map map = new HashMap();
+		map.put("name", "PayFact!");
+		return new ModelAndView(map, "index.mustache");
+	};
 }

@@ -12,9 +12,15 @@ package com.payfact;
 
 import com.payfact.controlador.IndexHandler;
 import static spark.Spark.*;
+import spark.template.mustache.MustacheTemplateEngine;
 
 public class App {
 	public static void main(String[] args) {
-		get("/", new IndexHandler().index);
+		// Routes
+		// Index
+		get("/", new IndexHandler().index, new MustacheTemplateEngine());
+
+		// Get facturas
+		get("/facturas", (rq,rp) -> "Facturas");
 	}
 }
