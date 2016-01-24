@@ -11,6 +11,7 @@ package com.payfact;
  */
 
 import com.payfact.controlador.IndexHandler;
+import com.payfact.utilidades.servicios.RecursoUsuario;
 import static spark.Spark.*;
 import spark.template.mustache.MustacheTemplateEngine;
 
@@ -19,8 +20,10 @@ public class App {
 		// Routes
 		// Index
 		get("/", new IndexHandler().index, new MustacheTemplateEngine());
+		get("/fail", new IndexHandler().indexFail, new MustacheTemplateEngine());
 
 		// Get facturas
 		get("/facturas", (rq,rp) -> "Facturas");
+		new RecursoUsuario();
 	}
 }

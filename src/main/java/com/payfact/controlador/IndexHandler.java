@@ -18,6 +18,14 @@ public class IndexHandler {
 	public TemplateViewRoute index = (request, response) -> {
 		Map map = new HashMap();
 		map.put("name", "PayFact!");
+		map.put("active", "hide");
+		return new ModelAndView(map, "index.mustache");
+	};
+
+	public TemplateViewRoute indexFail = (request, response) -> {
+		Map map = new HashMap();
+		map.put("name", "PayFact!");
+		map.put("active", "show");
 		return new ModelAndView(map, "index.mustache");
 	};
 }
