@@ -5,17 +5,14 @@
 */
 package com.payfact.utilidades.servicios;
 
+import com.payfact.modelo.ModeloCliente;
 import com.payfact.modelo.ModeloUsuario;
 import com.payfact.modelo.persistencia.entidades.Usuario;
-import com.payfact.utilidades.JsonTransformer;
 import java.util.HashMap;
-import static spark.Spark.get;
-import static spark.Spark.post;
 import java.util.Map;
 import spark.ModelAndView;
-import spark.Request;
-import spark.Response;
-import spark.template.mustache.MustacheTemplateEngine;
+import spark.Route;
+import spark.TemplateViewRoute;
 
 /**
  *
@@ -23,39 +20,37 @@ import spark.template.mustache.MustacheTemplateEngine;
  */
 public class RecursoUsuario {
 	private static final String API_CONTEXT = "/user";
-	private ModeloUsuario modelo;
+	private ModeloUsuario modeloUsuario = null;
+	private ModeloCliente modeloCliente = null;
 	private Usuario usuario;
 
 	public RecursoUsuario() {
-		this.modelo = new ModeloUsuario();
-		setUpResources();
+		this.modeloUsuario = new ModeloUsuario();
+		this.modeloCliente = new ModeloCliente();
 	}
 
-	void setUpResources(){
-		get(API_CONTEXT + "/inicio/:id", "application/json", (req, resp) -> {
-			return getVistaInicio(req);
-		}, new MustacheTemplateEngine());
-
-		post(API_CONTEXT + "/inicio", "application/json", (req, resp) -> {
-			String username = req.queryParams("username");
-			redireccionarUsuario(username, resp);
-			return "";
-		}, new JsonTransformer());
-	}
-
-	private ModelAndView getVistaInicio(Request req) {
+	public Route redirigirIngreso = (req, resp) -> {
+		String username = req.queryParams("username");
+		String path;
 		Map map = new HashMap();
-		this.usuario = this.modelo.findById(Integer.parseInt(req.params(":id")));
-		map.put("name", this.usuario.getUsername());
-		return new ModelAndView(map, "inicio.mustache");
-	}
-
-	private void redireccionarUsuario(String username, Response resp) {
-		this.usuario = modelo.find(username);
+		this.usuario = this.modeloUsuario.find(username);
 		if (usuario == null) {
 			resp.redirect("/fail");
 		} else {
 			resp.redirect(API_CONTEXT + "/inicio/" + this.usuario.getIdusuario());
 		}
-	}
+		return "";
+	};
+
+	public TemplateViewRoute manejadorInicio = (req, resp) -> {
+		Map map = new HashMap();
+		if (this.usuario == null) {
+			resp.redirect("/");
+		} else{
+			map.put("id", this.usuario.getIdusuario());
+			map.put("name", this.usuario.getUsername());
+			map.put("clientes", this.modeloCliente.findAll());
+		}
+		return new ModelAndView(map, "inicio.mustache");
+	};
 }

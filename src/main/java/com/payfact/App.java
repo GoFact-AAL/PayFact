@@ -11,19 +11,31 @@ package com.payfact;
  */
 
 import com.payfact.controlador.IndexHandler;
+import com.payfact.modelo.persistencia.entidades.Usuario;
 import com.payfact.utilidades.servicios.RecursoUsuario;
+import com.payfact.utilidades.servicios.UsuarioHandler;
+import spark.Request;
 import static spark.Spark.*;
 import spark.template.mustache.MustacheTemplateEngine;
 
 public class App {
+	private static final String API_CONTEXT = "/user";
+	private static final String USER_SESSION_ID = "user";
+
 	public static void main(String[] args) {
-		// Routes
-		// Index
+		// Controles
+		RecursoUsuario recursoUsuario = new RecursoUsuario();
+
+		// Usuario
 		get("/", new IndexHandler().index, new MustacheTemplateEngine());
 		get("/fail", new IndexHandler().indexFail, new MustacheTemplateEngine());
-
+		post("/", recursoUsuario.redirigirIngreso);
+		get(API_CONTEXT + "/inicio/:id", recursoUsuario.manejadorInicio, new MustacheTemplateEngine());
 		// Get facturas
-		get("/facturas", (rq,rp) -> "Facturas");
-		new RecursoUsuario();
+		get("/facturas", (req, resp) -> "Facturas");
+	}
+
+	private Usuario getAuthenticatedUser(Request request) {
+		return request.session().attribute(USER_SESSION_ID);
 	}
 }

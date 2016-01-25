@@ -5,9 +5,11 @@
 */
 package com.payfact.controlador;
 
+import com.payfact.modelo.persistencia.entidades.Usuario;
 import java.util.HashMap;
 import java.util.Map;
 import spark.ModelAndView;
+import spark.Request;
 import spark.TemplateViewRoute;
 
 /**
@@ -15,6 +17,8 @@ import spark.TemplateViewRoute;
  * @author camm
  */
 public class IndexHandler {
+	private static final String USER_SESSION_ID = "user";
+
 	public TemplateViewRoute index = (request, response) -> {
 		Map map = new HashMap();
 		map.put("name", "PayFact!");
@@ -28,4 +32,8 @@ public class IndexHandler {
 		map.put("active", "show");
 		return new ModelAndView(map, "index.mustache");
 	};
+
+	private Usuario getAuthenticatedUser(Request request) {
+		return request.session().attribute(USER_SESSION_ID);
+	}
 }
