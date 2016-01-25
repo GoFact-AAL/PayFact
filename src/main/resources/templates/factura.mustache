@@ -1,0 +1,16 @@
+{{! index.mustache }}
+{{<base}}
+{{$header}}
+{{<header}}
+{{$title}}PayFact! | Inicio{{/title}}
+{{/header}}
+{{/header}}
+{{$content}}
+    <h1>Facturas</h1>
+    {{#facturas}}
+        ID: {{identificador}}
+        Total: {{total}}
+        </br>
+    {{/facturas}}
+{{/content}}
+{{/base}}

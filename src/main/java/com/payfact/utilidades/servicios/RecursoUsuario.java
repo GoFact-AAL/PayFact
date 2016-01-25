@@ -31,7 +31,6 @@ public class RecursoUsuario {
 
 	public Route redirigirIngreso = (req, resp) -> {
 		String username = req.queryParams("username");
-		String path;
 		Map map = new HashMap();
 		this.usuario = this.modeloUsuario.find(username);
 		if (usuario == null) {
