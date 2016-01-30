@@ -38,7 +38,7 @@ public class App {
 		// Get facturas
 		get(API_CONTEXT + "/inicio/:idUser/cliente/:id", recursoFactura.manejadorFacturas, new MustacheTemplateEngine());
                 
-                get("*", new IndexHandler().index404, new MustacheTemplateEngine());
+                //get("*", new IndexHandler().index404, new MustacheTemplateEngine());
         }
 
 	private Usuario getAuthenticatedUser(Request request) {
