@@ -8,6 +8,8 @@ package com.payfact.modelo;
 import com.payfact.modelo.persistencia.entidades.Cliente;
 import com.payfact.modelo.persistencia.jpacontrollers.ClienteJpaController;
 import java.util.List;
+import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 
 /**
  *
@@ -28,4 +30,19 @@ public class ModeloCliente extends Modelo {
 	public Cliente findById(Integer id){
 		return this.controlador.findCliente(id);
 	}
+        
+        public Cliente find (String cedula){
+            
+            EntityManager em = this.controlador.getEntityManager();
+            try {
+                Cliente cliente = em.createNamedQuery("Cliente.findByCedulaidentidad", Cliente.class)
+                        .setParameter("cedulaidentidad", cedula)
+                        .getSingleResult();
+                return cliente;
+            } catch (NoResultException e) {
+                return null;
+            }
+        }
+        
+        
 }
