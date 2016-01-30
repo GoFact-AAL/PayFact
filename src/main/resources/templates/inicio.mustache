@@ -3,6 +3,16 @@
 {{$header}}
 {{<header}}
 {{$title}}PayFact! | Inicio{{/title}}
+{{$links}}
+    <link rel="stylesheet" type="text/css" href="/css/normalize.css">
+    <!-- Bootstrap -->
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap.css">
+    <!-- Owl -->
+    <link rel="stylesheet" type="text/css" href="/css/owl.css">
+    <!-- Animate.css -->
+    <link rel="stylesheet" type="text/css" href="/css/animate.css">
+|   <link rel="stylesheet" type="text/css" href="/css/cardio.css">
+{{/links}}
 {{/header}}
 {{/header}}
 {{$content}}
@@ -25,7 +35,7 @@
 		</ul>
 	</div>
 </nav>
-
+<div class="row">
     {{#clientes}}
     CI: {{cedulaidentidad}}
     Nombre: {{nombre}}
@@ -36,5 +46,6 @@
     <a href="/user/inicio/{{id}}/cliente/{{idcliente}}" class="btn">Edit</a>
     </br>
     {{/clientes}}
+</div>
 {{/content}}
 {{/base}}
