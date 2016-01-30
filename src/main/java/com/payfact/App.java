@@ -12,8 +12,8 @@ package com.payfact;
 
 import com.payfact.controlador.IndexHandler;
 import com.payfact.modelo.persistencia.entidades.Usuario;
+import com.payfact.utilidades.servicios.FacturasRecurso;
 import com.payfact.utilidades.servicios.RecursoUsuario;
-import com.payfact.utilidades.servicios.UsuarioHandler;
 import spark.Request;
 import static spark.Spark.*;
 import spark.template.mustache.MustacheTemplateEngine;
@@ -25,14 +25,16 @@ public class App {
 	public static void main(String[] args) {
 		// Controles
 		RecursoUsuario recursoUsuario = new RecursoUsuario();
+		FacturasRecurso recursoFactura = new FacturasRecurso();
 
 		// Usuario
 		get("/", new IndexHandler().index, new MustacheTemplateEngine());
 		get("/fail", new IndexHandler().indexFail, new MustacheTemplateEngine());
 		post("/", recursoUsuario.redirigirIngreso);
 		get(API_CONTEXT + "/inicio/:id", recursoUsuario.manejadorInicio, new MustacheTemplateEngine());
+
 		// Get facturas
-		get("/facturas", (req, resp) -> "Facturas");
+		get(API_CONTEXT + "/inicio/:idUser/cliente/:id", recursoFactura.manejadorFacturas, new MustacheTemplateEngine());
 	}
 
 	private Usuario getAuthenticatedUser(Request request) {

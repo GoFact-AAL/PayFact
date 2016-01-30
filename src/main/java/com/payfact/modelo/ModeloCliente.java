@@ -24,4 +24,8 @@ public class ModeloCliente extends Modelo {
 	public List<Cliente> findAll(){
 		return this.controlador.findClienteEntities();
 	}
+
+	public Cliente findById(Integer id){
+		return this.controlador.findCliente(id);
+	}
 }
