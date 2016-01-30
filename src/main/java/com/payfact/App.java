@@ -17,7 +17,6 @@ import com.payfact.controlador.RecursoUsuario;
 import spark.Request;
 import static spark.Spark.*;
 import spark.template.mustache.MustacheTemplateEngine;
-import javax.ws.rs.WebApplicationException;
 
 public class App {
 	private static final String API_CONTEXT = "/user";
