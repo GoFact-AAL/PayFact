@@ -31,6 +31,7 @@ CREATE TABLE Factura(
     , identificador VARCHAR (25)
     , idCliente INT NOT NULL
     , total INT NOT NULL
+	, saldoMora INT NOT NULL
     , CONSTRAINT factura_cliente_fk
     FOREIGN KEY (idCliente)
     REFERENCES Cliente (idCliente)
@@ -52,7 +53,6 @@ CREATE TABLE Cobranza(
     , fechaDeGestion DATE NOT NULL
     , fechaCompromisoCobro DATE
     , observaciones varchar (100)
-    , tipoCobranza varchar(15)
     , CONSTRAINT cobranza_abono FOREIGN KEY (idAbono) REFERENCES Abono (idAbono)
     , CONSTRAINT cobranza_tipoCobranza FOREIGN KEY (idTipoCobranza) REFERENCES TipoCobranza (idTipoCobranza)
     , CONSTRAINT cobranza_usuario FOREIGN KEY (idUsuario) REFERENCES Usuario (idUsuario)
