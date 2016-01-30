@@ -17,6 +17,7 @@ import com.payfact.controlador.RecursoUsuario;
 import spark.Request;
 import static spark.Spark.*;
 import spark.template.mustache.MustacheTemplateEngine;
+import javax.ws.rs.WebApplicationException;
 
 public class App {
 	private static final String API_CONTEXT = "/user";
@@ -37,7 +38,9 @@ public class App {
 
 		// Get facturas
 		get(API_CONTEXT + "/inicio/:idUser/cliente/:id", recursoFactura.manejadorFacturas, new MustacheTemplateEngine());
-	}
+                
+                get("*", new IndexHandler().index404, new MustacheTemplateEngine());
+        }
 
 	private Usuario getAuthenticatedUser(Request request) {
 		return request.session().attribute(USER_SESSION_ID);
