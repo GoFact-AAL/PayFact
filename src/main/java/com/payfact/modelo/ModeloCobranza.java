@@ -7,8 +7,7 @@ package com.payfact.modelo;
 
 import com.payfact.modelo.persistencia.entidades.Cobranza;
 import com.payfact.modelo.persistencia.jpacontrollers.CobranzaJpaController;
-import javax.persistence.EntityManager;
-import javax.persistence.NoResultException;
+
 
 /**
  *
