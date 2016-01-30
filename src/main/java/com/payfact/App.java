@@ -12,8 +12,8 @@ package com.payfact;
 
 import com.payfact.controlador.IndexHandler;
 import com.payfact.modelo.persistencia.entidades.Usuario;
-import com.payfact.utilidades.servicios.FacturasRecurso;
-import com.payfact.utilidades.servicios.RecursoUsuario;
+import com.payfact.controlador.FacturasRecurso;
+import com.payfact.controlador.RecursoUsuario;
 import spark.Request;
 import static spark.Spark.*;
 import spark.template.mustache.MustacheTemplateEngine;
