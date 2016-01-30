@@ -27,6 +27,8 @@ public class App {
 		RecursoUsuario recursoUsuario = new RecursoUsuario();
 		FacturasRecurso recursoFactura = new FacturasRecurso();
 
+		staticFileLocation("/public");
+
 		// Usuario
 		get("/", new IndexHandler().index, new MustacheTemplateEngine());
 		get("/fail", new IndexHandler().indexFail, new MustacheTemplateEngine());
