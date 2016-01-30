@@ -19,7 +19,6 @@ import static spark.Spark.*;
 import spark.template.mustache.MustacheTemplateEngine;
 
 public class App {
-	private static final String API_CONTEXT = "/user";
 	private static final String USER_SESSION_ID = "user";
 
 	public static void main(String[] args) {
@@ -33,13 +32,25 @@ public class App {
 		get("/", new IndexHandler().index, new MustacheTemplateEngine());
 		get("/fail", new IndexHandler().indexFail, new MustacheTemplateEngine());
 		post("/", recursoUsuario.redirigirIngreso);
-		get(API_CONTEXT + "/inicio/:id", recursoUsuario.manejadorInicio, new MustacheTemplateEngine());
 
-		// Get facturas
-		get(API_CONTEXT + "/inicio/:idUser/cliente/:id", recursoFactura.manejadorFacturas, new MustacheTemplateEngine());
-                
-                get("*", new IndexHandler().index404, new MustacheTemplateEngine());
-        }
+		// Nueva Cobranza
+		get("/inicio/gestion", recursoUsuario.manejadorInicio, new MustacheTemplateEngine());
+		get("/inicio/gestion/:id", (req, resp) -> null, new MustacheTemplateEngine());
+		get("/inicio/gestion/:idCli/cobranza/:id", new IndexHandler().index, new MustacheTemplateEngine());
+		post("/inicio/gestion/:idCli/cobranza/:id", (req, post) -> "Post Cobranza");
+
+		// Lista Clientes
+		get("/inicio/clientes", (req, resp) -> "Lista de clientes");
+
+		// Listar Facturas
+		get("/inicio/clientes/:id", (req, resp) -> "Facturas del cliente");
+
+		// Listar Cobros
+		get("/inicio/clientes/:idCli/cobros/:idFact", (req, resp) -> "Cobros de la factura");
+
+		// Listar Abonos
+		get("/inicio/clientes/:idCli/abonos/:idFact", (req, resp) -> "Abonos de la factura");
+	}
 
 	private Usuario getAuthenticatedUser(Request request) {
 		return request.session().attribute(USER_SESSION_ID);
