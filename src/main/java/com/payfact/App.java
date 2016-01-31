@@ -40,20 +40,21 @@ public class App {
 		get("/inicio/gestion/clientes", recursoUsuario.manejadorInicio, new MustacheTemplateEngine());
 		get("/inicio/gestion/clientes/:id", recursoFactura.manejadorFacturas, new MustacheTemplateEngine());
 		get("/inicio/gestion/clientes/:idU/cobranza/:idC/factura/:idF", recursoCobranza.manjeadorCobranzasForm, new MustacheTemplateEngine());
-		post("/inicio/gestion/clientes/:idU/cobranza/:idC/factura/:idF", (req, post) -> "Post Cobranza");
+		post("/inicio/gestion/clientes/:idU/cobranza/:idC/factura/:idF", (req, post) -> {return post;});
 
 		// Lista Clientes
-		get("/inicio/cobranza/clientes", (req, resp) -> "Lista de clientes");
-		get("/inicio/abonos/clientes", (req, resp) -> "Lista de clientes");
+		get("/inicio/cobranza/clientes", recursoUsuario.manejadorInicioCobranza, new MustacheTemplateEngine());
+		get("/inicio/abonos/clientes", recursoUsuario.manejadorInicioAbono, new MustacheTemplateEngine());
 
 		// Listar Facturas
-		get("/inicio/clientes/:id", (req, resp) -> "Facturas del cliente");
+		get("/inicio/cobranza/clientes/:id", recursoFactura.manejadorFacturasCobranza, new MustacheTemplateEngine());
+		get("/inicio/abonos/clientes/:id", recursoFactura.manejadorFacturasAbono, new MustacheTemplateEngine());
 
 		// Listar Cobros
-		get("/inicio/clientes/:idCli/cobros/:idFact", (req, resp) -> "Cobros de la factura");
+		get("/inicio/cobranza/clientes/:idU/cobranza/:idC/factura/:idF",  (req, resp) -> "Lista Cobros");
 
 		// Listar Abonos
-		get("/inicio/clientes/:idCli/abonos/:idFact", (req, resp) -> "Abonos de la factura");
+		get("/inicio/abono/clientes/:idU/cobranza/:idC/factura/:idF", (req, resp) -> "Lista abonos");
 	}
 
 	private Usuario getAuthenticatedUser(Request request) {
