@@ -33,9 +33,13 @@ public class IndexHandler {
 		return new ModelAndView(map, "index.mustache");
 	};
 
-        public TemplateViewRoute index404 = (request, response) -> {
-                return new ModelAndView(null,"404.mustache");
-        };
+    public TemplateViewRoute index404 = (request, response) -> {
+        return new ModelAndView(null,"404.mustache");
+    };
+
+	public TemplateViewRoute menuInicio = (request, responso) -> {
+		return new ModelAndView(null,"menu.mustache");
+	};
         
 	private Usuario getAuthenticatedUser(Request request) {
 		return request.session().attribute(USER_SESSION_ID);
