@@ -33,5 +33,6 @@ public class FacturasRecurso {
 				Integer id = Integer.parseInt(req.params(":id"));
 				this.cliente = this.modeloCliente.findById(id);
 				map.put("facturas", this.cliente.getFacturaList());
+				map.put("idU", id);
 				return new ModelAndView(map, "factura.mustache");
 			};}

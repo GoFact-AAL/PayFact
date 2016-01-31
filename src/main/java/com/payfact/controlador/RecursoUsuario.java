@@ -19,7 +19,6 @@ import spark.TemplateViewRoute;
  * @author camm
  */
 public class RecursoUsuario {
-	private static final String API_CONTEXT = "/user";
 	private ModeloUsuario modeloUsuario = null;
 	private ModeloCliente modeloCliente = null;
 	private Usuario usuario;
@@ -36,7 +35,7 @@ public class RecursoUsuario {
 		if (usuario == null) {
 			resp.redirect("/fail");
 		} else {
-			resp.redirect(API_CONTEXT + "/inicio/" + this.usuario.getIdusuario());
+			resp.redirect("/inicio/" + this.usuario.getIdusuario());
 		}
 		return "";
 	};
