@@ -37,7 +37,7 @@ public class RecursoUsuario {
 		} else {
 			resp.redirect("/inicio/" + this.usuario.getIdusuario());
 		}
-		return "";
+		return resp;
 	};
 
 	public TemplateViewRoute manejadorInicio = (req, resp) -> {
@@ -45,6 +45,33 @@ public class RecursoUsuario {
 		if (this.usuario == null) {
 			resp.redirect("/");
 		} else{
+			map.put("tipo", "gestion");
+			map.put("id", this.usuario.getIdusuario());
+			map.put("name", this.usuario.getUsername());
+			map.put("clientes", this.modeloCliente.findAll());
+		}
+		return new ModelAndView(map, "inicio.mustache");
+	};
+
+	public TemplateViewRoute manejadorInicioCobranza = (req, resp) -> {
+		Map map = new HashMap();
+		if (this.usuario == null) {
+			resp.redirect("/");
+		} else{
+			map.put("tipo", "cobranza");
+			map.put("id", this.usuario.getIdusuario());
+			map.put("name", this.usuario.getUsername());
+			map.put("clientes", this.modeloCliente.findAll());
+		}
+		return new ModelAndView(map, "inicio.mustache");
+	};
+
+	public TemplateViewRoute manejadorInicioAbono  = (req, resp) -> {
+		Map map = new HashMap();
+		if (this.usuario == null) {
+			resp.redirect("/");
+		} else{
+			map.put("tipo", "abonos");
 			map.put("id", this.usuario.getIdusuario());
 			map.put("name", this.usuario.getUsername());
 			map.put("clientes", this.modeloCliente.findAll());

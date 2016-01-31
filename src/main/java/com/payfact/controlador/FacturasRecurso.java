@@ -32,7 +32,31 @@ public class FacturasRecurso {
 				Map map = new HashMap();
 				Integer id = Integer.parseInt(req.params(":id"));
 				this.cliente = this.modeloCliente.findById(id);
+				map.put("tipo", "gestion");
 				map.put("facturas", this.cliente.getFacturaList());
 				map.put("idU", id);
 				return new ModelAndView(map, "factura.mustache");
-			};}
+			};
+
+	public TemplateViewRoute manejadorFacturasCobranza =
+			(req, resp) -> {
+				Map map = new HashMap();
+				Integer id = Integer.parseInt(req.params(":id"));
+				this.cliente = this.modeloCliente.findById(id);
+				map.put("tipo", "cobranza");
+				map.put("facturas", this.cliente.getFacturaList());
+				map.put("idU", id);
+				return new ModelAndView(map, "factura.mustache");
+			};
+
+	public TemplateViewRoute manejadorFacturasAbono =
+			(req, resp) -> {
+				Map map = new HashMap();
+				Integer id = Integer.parseInt(req.params(":id"));
+				this.cliente = this.modeloCliente.findById(id);
+				map.put("tipo", "abono");
+				map.put("facturas", this.cliente.getFacturaList());
+				map.put("idU", id);
+				return new ModelAndView(map, "factura.mustache");
+			};
+}
