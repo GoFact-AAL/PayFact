@@ -29,13 +29,18 @@ public class ModeloUsuario extends Modelo {
 		return this.controlador.findUsuario(id);
 	}
 
-	public Usuario find(String username){
+	public Usuario find(String username, String contrasena){
 		EntityManager em = this.controlador.getEntityManager();
 		try{
 		Usuario usuario = em.createNamedQuery("Usuario.findByUsername", Usuario.class)
 				.setParameter("username", username)
 				.getSingleResult();
-			return usuario;
+                    if(usuario.getPassword().equals(contrasena)){
+                        return usuario;
+                    }
+                    else{
+                        return null;
+                    }
 		} catch(NoResultException ex){
 			return null;
 		}

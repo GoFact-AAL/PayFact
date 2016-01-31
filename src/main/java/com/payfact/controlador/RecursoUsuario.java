@@ -30,8 +30,9 @@ public class RecursoUsuario {
 
 	public Route redirigirIngreso = (req, resp) -> {
 		String username = req.queryParams("username");
+                String password = req.queryParams("password");
 		Map map = new HashMap();
-		this.usuario = this.modeloUsuario.find(username);
+		this.usuario = this.modeloUsuario.find(username, password);
 		if (usuario == null) {
 			resp.redirect("/fail");
 		} else {
