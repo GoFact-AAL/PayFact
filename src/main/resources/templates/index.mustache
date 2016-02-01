@@ -1,8 +1,11 @@
-{{! index.mustache }}
+{{!index.mustache }}
 {{<base}}
 {{$header}}
 {{<header}}
-{{$title}}PayFact!{{/title}}
+{{$title}}PayFact{{/title}}
+{{$links}}
+<link rel="stylesheet" type="text/css" href="/css/Cliente.css">   
+{{/links}}
 {{/header}}
 {{/header}}
 {{$content}}
@@ -13,8 +16,8 @@
   <div class="modal-content">
       <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-          <h1 class="text-center">Bienvenido a {{name}}! </h1>
-          <p class="text-center">Con esta aplicación podras gestionar las facturas y pagos de tus deudores. </p>
+          <span class="name text-center">{{name}}</span>
+          <p class="text-center">Gestiona las facturas y pagos de tus deudores. </p>
       </div>
       <div class="col-md-8 col-md-offset-2 form-group  alert alert-danger alert-dismissible {{active}}" role="alert">
           <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>

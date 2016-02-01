@@ -1,3 +1,15 @@
 body {
   padding-top: 50px;
 }
+
+ .modal-header .name{
+    display: block;
+    /* text-transform: uppercase; */
+    font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-size: 2em;
+    font-weight: 700;
+}
+
+ .navbar-default {
+    background-color: #2c3e50;
+}
