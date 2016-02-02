@@ -10,7 +10,9 @@ package com.payfact;
  * @author camm
  */
 
+import com.payfact.controlador.AbonoHandler;
 import com.payfact.controlador.CobranzasHandler;
+import com.payfact.controlador.CobrosHandler;
 import com.payfact.controlador.IndexHandler;
 import com.payfact.modelo.persistencia.entidades.Usuario;
 import com.payfact.controlador.FacturasRecurso;
@@ -27,6 +29,8 @@ public class App {
 		RecursoUsuario recursoUsuario = new RecursoUsuario();
 		FacturasRecurso recursoFactura = new FacturasRecurso();
 		CobranzasHandler recursoCobranza = new CobranzasHandler();
+		AbonoHandler recursoAbono = new AbonoHandler();
+		CobrosHandler recursoCobros = new CobrosHandler();
 
 		staticFileLocation("/public");
 
@@ -40,7 +44,7 @@ public class App {
 		get("/inicio/gestion/clientes", recursoUsuario.manejadorInicio, new MustacheTemplateEngine());
 		get("/inicio/gestion/clientes/:id", recursoFactura.manejadorFacturas, new MustacheTemplateEngine());
 		get("/inicio/gestion/clientes/:idU/cobranza/:idC/factura/:idF", recursoCobranza.manjeadorCobranzasForm, new MustacheTemplateEngine());
-		post("/inicio/gestion/clientes/:idU/cobranza/:idC/factura/:idF", (req, post) -> {return post;});
+		post("/inicio/gestion/clientes", recursoCobranza.manjeadorCobranza);
 
 		// Lista Clientes
 		get("/inicio/cobranza/clientes", recursoUsuario.manejadorInicioCobranza, new MustacheTemplateEngine());
@@ -51,10 +55,10 @@ public class App {
 		get("/inicio/abonos/clientes/:id", recursoFactura.manejadorFacturasAbono, new MustacheTemplateEngine());
 
 		// Listar Cobros
-		get("/inicio/cobranza/clientes/:idU/cobranza/:idC/factura/:idF",  (req, resp) -> "Lista Cobros");
+		get("/inicio/cobranza/clientes/:idU/cobranza/:idC/factura/:idF", recursoCobros.mostrarCobros, new MustacheTemplateEngine());
 
 		// Listar Abonos
-		get("/inicio/abono/clientes/:idU/cobranza/:idC/factura/:idF", (req, resp) -> "Lista abonos");
+		get("/inicio/abono/clientes/:idU/cobranza/:idC/factura/:idF", recursoAbono.mostrarAbonos, new MustacheTemplateEngine());
 	}
 
 	private Usuario getAuthenticatedUser(Request request) {

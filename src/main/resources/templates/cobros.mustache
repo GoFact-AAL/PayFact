@@ -1,0 +1,42 @@
+{{! cobros.mustache }}
+{{<base}}
+{{$header}}
+{{<header}}
+{{$title}}PayFact! | Cobranza{{/title}}
+{{$links}}
+<link rel="stylesheet" type="text/css" href="/css/Cliente.css">
+{{/links}}
+{{/header}}
+{{/header}}
+{{$content}}
+
+{{$navbar}}
+{{<navbar}}
+{{/navbar}}
+{{/navbar}}
+
+<div class="text-left">
+    <h1 class="">Cobros</h1>
+</div>
+<table class="table table-bordered">
+        <thead>
+            <tr>
+              <th>Fecha Gestión</th>
+              <th>Fecha Compromiso</th>
+              <th>Observación</th>
+              <th>Tipo cobranza</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#cobros}}
+            <tr>
+              <td>{{fechadegestion}}</td>
+              <td>{{fechacompromisocobro}}</td>
+              <td>{{observaciones}}</td>
+              <td>{{idtipocobranza.nombretipo}}</td>
+            </tr>
+            {{/cobros}}
+        </tbody>
+</table>
+{{/content}}
+{{/base}}

@@ -7,6 +7,8 @@ package com.payfact.modelo;
 
 import com.payfact.modelo.persistencia.entidades.Cobranza;
 import com.payfact.modelo.persistencia.jpacontrollers.CobranzaJpaController;
+import java.util.List;
+import javax.persistence.EntityManager;
 
 
 /**
@@ -28,5 +30,5 @@ public class ModeloCobranza extends Modelo {
     public Cobranza findById (Integer id){
         return this.controlador.findCobranza(id);
     }
-    
+
 }       

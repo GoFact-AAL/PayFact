@@ -1,0 +1,39 @@
+{{! abonos.mustache }}
+{{<base}}
+{{$header}}
+{{<header}}
+{{$title}}PayFact! | Cobranza{{/title}}
+{{$links}}
+<link rel="stylesheet" type="text/css" href="/css/Cliente.css">   
+{{/links}}
+{{/header}}
+{{/header}}
+{{$content}}
+
+{{$navbar}}
+{{<navbar}}
+{{/navbar}}
+{{/navbar}}
+
+<div class="text-left">
+    <h1 class="">Abonos</h1>
+</div>
+
+<table class="table table-bordered">
+        <thead>
+            <tr>
+              <th>Fecha</th>
+              <th>Monto</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#abonos}}
+            <tr>
+              <td>{{fechapago}}</td>
+              <td>{{monto}}</td>
+            </tr>
+            {{/abonos}}
+        </tbody>
+</table>
+{{/content}}
+{{/base}}
